@@ -165,11 +165,11 @@ export const dressSuggestion = async (req, res) => {
             return res.status(404).json({ error: "User not found" });
         }
 
-        // const weatherData = await fetchWeatherData(user.location);
-        // const weatherCondition = determineWeatherCondition(weatherData);
-        // console.log('weather condition', weatherCondition )
+        const weatherData = await fetchWeatherData(user.location);
+        const weatherCondition = determineWeatherCondition(weatherData);
+        console.log('weather condition', weatherCondition )
 
-        const suggestedColor = suggestColorBasedOnOccasion(occasion, user.skinTone)
+        const suggestedColor = suggestColorBasedOnOccasion(occasion, user.skinTone) || suggestColorBasedOnPreferences(weatherCondition, user.preferences.favoriteColors, user.skinTone)
 
         res.status(200).json({ message: "Dress color suggestion", color: suggestedColor });
     } catch (error) {

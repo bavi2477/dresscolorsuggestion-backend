@@ -38,11 +38,11 @@ export const suggestColorBasedOnPreferences = ( weatherCondition, preferences, s
     if (weatherCondition === 'Sunny') {
         // Suggestion logic based on weather condition
         if (skinTone === 'light') {
-            return preferredColors.includes('Light Blue') ? 'Light Blue' : 'Pastel Colors for Light Skin';
+            return preferredColors.includes('Light Blue') ? 'Light Blue' : 'Pastel Colors ';
         } else if (skinTone === 'medium') {
-            return preferredColors.includes('Beige') ? 'Beige' : 'Pastel Colors for Medium Skin';
+            return preferredColors.includes('Beige') ? 'Beige' : 'Pastel Colors ';
         } else if (skinTone === 'dark') {
-            return preferredColors.includes('Coral') ? 'Coral' : 'Pastel Colors for Dark Skin';
+            return preferredColors.includes('Coral') ? 'Coral' : 'Pastel Colors ';
         }
     } else if (weatherCondition === 'Rainy') {
         // Suggestion logic for rainy weather
