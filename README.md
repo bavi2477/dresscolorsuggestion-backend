@@ -96,6 +96,6 @@ The Dress Suggestion App is a web application that suggests clothing colors base
 
 ## Contact
 
-For any inquiries or issues, please contact [your email](mailto:bavithra.sjh@gmail.com).
+For any inquiries or issues, please contact [bavithra.sjh@gmail.com]
 
 
