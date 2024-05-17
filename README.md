@@ -1,82 +1,101 @@
-# User Authentication and Password Reset System
+# Dress Suggestion App
 
-This project implements a user authentication system with password reset functionality using Node.js, Express, MongoDB, and React.
+## Overview
+
+The Dress Suggestion App is a web application that suggests clothing colors based on weather conditions, user preferences, and occasions. The app fetches weather data, evaluates the weather condition, and suggests suitable colors for different skin tones.
 
 ## Features
 
-- User registration with username, email, and password.
-- User login with email and password.
-- Password reset request via email.
-- Resetting password using a unique token sent via email.
+- User registration and login
+- Password reset via email
+- Fetch weather data based on user location
+- Suggest clothing colors based on weather, skin tone, and occasion
+- Get complementary colors and shades of a specified color
 
-## Installation
+## Technologies Used
+
+- Node.js
+- Express.js
+- MongoDB (via Mongoose)
+- JWT for authentication
+- bcrypt for password hashing
+- nodemailer for email services
+- chroma-js for color manipulations
+- axios for HTTP requests
+
+## API Endpoints
+
+### User Authentication
+
+- `POST /register`: Register a new user
+- `POST /login`: Login an existing user
+- `GET /getuser`: Get user details (requires authentication)
+- `POST /forgot-password`: Request a password reset link
+- `GET /reset-password/:token`: Redirect to password reset page
+- `POST /reset-password/:token`: Reset the password using the token
+
+### User Preferences
+
+- `POST /user-preference/:userId`: Set user preferences (skin tone, location)
+
+### Dress Suggestion
+
+- `POST /dress-suggestion/:userId`: Get dress color suggestion based on user data and occasion
+
+### Color Utilities
+
+- `GET /shades/:colorName`: Get shades of a specified color
+- `GET /complementary/:colorName`: Get complementary color of a specified color
+
+## Setup Instructions
+
+### Prerequisites
+
+- Node.js
+- MongoDB
+
+### Installation
 
 1. Clone the repository:
-
-    ```bash
-    git clone 
+    ```sh
+    git clone https://github.com/yourusername/dress-suggestion-app.git
+    cd dress-suggestion-app
     ```
 
-2. Install dependencies for both backend and frontend:
-
-    ```bash
+2. Install dependencies:
+    ```sh
     npm install
     ```
 
 3. Set up environment variables:
 
-    Create a `.env` file in the `backend` directory and add the following variables:
+    Create a `.env` file in the root directory and add the following:
 
-    ```plaintext
-    PORT=3001
-    MONGODBCONNECTIONSTRING=<your_mongodb_connection_string>
-    JWT_SECRET=<your_jwt_secret_key>
+    ```env
+    PORT = 4000
+    MONGODBCONNECTIONSTRING = mongodb+srv://bavithrasjh:r6KQvXjUylWMtgtj@cluster0.zctslm7.mongodb.net/
+    JWT_SECRET = secret
     ```
 
-4. Start the backend server:
-
-    ```bash
+4. Start the server:
+    ```sh
     npm start
     ```
 
-5. Start the frontend development server:
+    The server will run on `http://localhost:4000`.
 
-    ```bash
-    npm start
-    ```
+### Usage
 
-## Backend
+1. Register a new user by sending a POST request to `/register` with `username`, `email`, and `password`.
+2. Login the user by sending a POST request to `/login` with `email` and `password`.
+3. Set user preferences by sending a POST request to `/user-preference/:userId` with `skinTone` and `location`.
+4. Get dress suggestions by sending a POST request to `/dress-suggestion/:userId` with `occasion`.
+5. Fetch shades of a color by sending a GET request to `/shades/:colorName`.
+6. Fetch complementary color by sending a GET request to `/complementary/:colorName`.
 
-- **Express Server**: Handles HTTP requests and serves as the backend API.
-- **MongoDB**: Database to store user information and password reset tokens.
-- **JWT (JSON Web Tokens)**: Used for user authentication and generating reset tokens.
-- **Nodemailer**: Sends emails for password reset requests.
 
-## Frontend
+## Contact
 
-- **React**: Frontend framework for building user interfaces.
-- **React Router**: Handles client-side routing for different pages.
-- **Axios**: Makes HTTP requests to the backend API.
+For any inquiries or issues, please contact [your email](mailto:bavithra.sjh@gmail.com).
 
-## API Endpoints
 
-- `POST /api/user/register`: Registers a new user.
-- `POST /api/user/login`: Logs in a user.
-- `POST /api/user/forgot-password`: Initiates a password reset request.
-- `POST /api/user/reset-password/:token`: Resets the password using the provided token.
-
-## Folder Structure
-
-- **backend**: Contains the Express server code, database configuration, routers, controllers, models, and services.
-- **frontend**: Contains the React frontend code with components, pages, and styles.
-
-## Usage
-
-1. Register a new user by providing a username, email, and password.
-2. Log in with the registered email and password.
-3. If you forget your password, request a password reset via email.
-4. Click on the password reset link sent to your email and set a new password.
-
-## License
-
-This project is licensed under the [MIT License](LICENSE).
