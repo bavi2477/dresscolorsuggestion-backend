@@ -71,7 +71,7 @@ export const requestPasswordReset = async (req, res) => {
         user.resetToken = resetToken;
         await user.save();
 
-        const resetLink = `http://localhost:4000/api/user/reset-password/${resetToken}`;
+        const resetLink = `https://dresssuggestion-frontend.netlify.app/reset-password/${resetToken}`;
         await mail(email, 'Password Reset Request', `Click this link to reset your password: ${resetLink}`);
 
         res.status(200).json({ message: "Check your mail for the reset link" });
@@ -183,13 +183,13 @@ export const getShadesOfColor = async (req, res) => {
             return res.status(404).json({ error: "Color not found" });
         }
 
-        // Generate shades using chroma.js
+       
         const shades = chroma.scale([baseColor, 'black']).mode('lab').colors(6);
 
-        // Generate lighter shades by adjusting the luminance
+       
         const lighterShades = shades.map(color => chroma(color).luminance(0.8).hex());
 
-        // Combine shades and lighter shades into a single array
+       
         const combinedShades = [...shades, ...lighterShades];
 
         res.status(200).json({ shades: combinedShades });
@@ -204,11 +204,10 @@ export const getShadesOfColor = async (req, res) => {
 export const getComplementaryColor = async (req, res) =>  {
     try {
         let givenColor = req.params.colorName;
-        // Convert color to hexadecimal if not already in hexadecimal format
+        
         givenColor = convertColorToHex(givenColor);
         const complementaryColor = calculateComplementaryColor(givenColor);
         const cleanedColor = complementaryColor.replace('#', '');
-        // Generate a link to color-hex.com with the complementary color value as a query parameter
         const colorHexLink = `https://www.color-hex.com/color/${cleanedColor}`;
 
         res.json({ complementaryColor, colorHexLink });
