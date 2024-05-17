@@ -4,7 +4,7 @@ import User from '../Models/userSchema.js';
 
 dotenv.config()
 const authMiddleware = async(req, res, next) => {
-    const token = req.header('Authorization') //1st method
+    const token = req.header('Authorization') 
     if(!token) {
         return res.status(401).json({message:"token is missing"})
     }

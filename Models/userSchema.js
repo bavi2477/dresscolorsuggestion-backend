@@ -18,16 +18,6 @@ const userSchema = new mongoose.Schema({
     token: {
         type : String
     },
-    role: {
-        type: String
-    },
-    preferences: {
-        favoriteColors: [String], 
-        dislikedColors: [String], 
-    },
-    contrastColor: {
-        type: String
-    },
     skinTone: {
         type: String
     },

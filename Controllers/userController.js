@@ -135,14 +135,9 @@ export const resetPassword = async (req, res) => {
 export const userPreference = async (req, res) => {
     try {
         const { userId } = req.params;
-        const { favoriteColors, dislikedColors, contrastColor, skinTone, location } = req.body;
+        const {skinTone, location } = req.body;
 
         const updatedUser = await User.findByIdAndUpdate(userId, {
-            preferences: {
-                favoriteColors: favoriteColors,
-                dislikedColors: dislikedColors
-            },
-            contrastColor: contrastColor,
             skinTone: skinTone,
             location: location, 
         }, { new: true }); 
@@ -169,7 +164,7 @@ export const dressSuggestion = async (req, res) => {
         const weatherCondition = determineWeatherCondition(weatherData);
         console.log('weather condition', weatherCondition )
 
-        const suggestedColor = suggestColorBasedOnOccasion(occasion, user.skinTone) || suggestColorBasedOnPreferences(weatherCondition, user.preferences.favoriteColors, user.skinTone)
+        const suggestedColor = suggestColorBasedOnOccasion(occasion, user.skinTone) || suggestColorBasedOnPreferences(weatherCondition, user.skinTone)
 
         res.status(200).json({ message: "Dress color suggestion", color: suggestedColor });
     } catch (error) {

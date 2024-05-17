@@ -18,7 +18,7 @@ export const fetchWeatherData = async (location) => {
 
 export const determineWeatherCondition = (weather) => {
     const temperature = weather.main.temp;
-    const precipitation = weather.weather[0].main; // Assuming 'weather' is an array
+    const precipitation = weather.weather[0].main; 
 
     if (temperature > 25 && precipitation === 'Clear') {
         return 'Sunny';
@@ -32,20 +32,17 @@ export const determineWeatherCondition = (weather) => {
 }
 
 
-export const suggestColorBasedOnPreferences = ( weatherCondition, preferences, skinTone) => {
+export const suggestColorBasedOnPreferences = ( weatherCondition, skinTone) => {
 
-    const preferredColors = preferences.favoriteColors || [];
     if (weatherCondition === 'Sunny') {
-        // Suggestion logic based on weather condition
         if (skinTone === 'light') {
-            return preferredColors.includes('Light Blue') ? 'Light Blue' : 'Pastel Colors ';
+            return 'Light Blue' ;
         } else if (skinTone === 'medium') {
-            return preferredColors.includes('Beige') ? 'Beige' : 'Pastel Colors ';
+            return  'Beige' ;
         } else if (skinTone === 'dark') {
-            return preferredColors.includes('Coral') ? 'Coral' : 'Pastel Colors ';
+            return   'Pastel Colors ';
         }
     } else if (weatherCondition === 'Rainy') {
-        // Suggestion logic for rainy weather
         if (skinTone === 'light') {
             return 'Black for Light Skin';
         } else if (skinTone === 'medium') {
@@ -54,27 +51,24 @@ export const suggestColorBasedOnPreferences = ( weatherCondition, preferences, s
             return 'Charcoal for Dark Skin';
         }
     } else if (weatherCondition === 'Cold') {
-        // Suggestion logic for cold weather
         if (skinTone === 'light') {
-            return preferredColors.includes('Pastel Pink') ? 'Pastel Pink' : 'pastel pink';
+            return  'Pastel Pink';
         } else if (skinTone === 'medium') {
-            return preferredColors.includes('Burgundy') ? 'Burgundy' : 'Dark Colors for Medium Skin';
+            return  'Burgundy';
         } else if (skinTone === 'dark') {
-            return preferredColors.includes('Navy') ? 'Navy' : 'Dark Colors for Dark Skin';
+            return  'Navy';
         }
     } else if (weatherCondition === 'Moderate') {
-        // Suggestion logic for moderate weather
         if (skinTone === 'light') {
-            return preferredColors.includes('Mauve') ? 'Mauve' : 'Mauve or Neutral';
+            return  'Mauve';
         } else if (skinTone === 'medium') {
-            return preferredColors.includes('Teal') ? 'Teal' : 'Teal or neutral colors';
+            return  'Teal' ;
         } else if (skinTone === 'dark') {
-            return preferredColors.includes('Olive green') ? 'Olive green' : 'Olive green or neutral colors';
+            return  'Olive green' ;
         }
     }
     else {
-        // Default suggestion
-        return preferredColors[0] || 'Your Favorite Color';
+        return 'Your Favorite Color';
     }
 }
 
@@ -107,7 +101,6 @@ export const suggestColorBasedOnOccasion = (occasion, skinTone) => {
             return 'Bold Red';
         }
     } else if (lowerCaseOccasion === 'funeral') {
-        // Assuming black is universal for all skin tones in this context
         return 'Black';
     } else if (lowerCaseOccasion === 'casual') {
         if (skinTone === 'light') {
@@ -138,10 +131,10 @@ export const colorMap = {
     "white": "#FFFFFF"
 };
 
-// Function to convert color name to hexadecimal
+
 export const convertColorToHex = (color) => {
     if (/^#[0-9A-F]{6}$/i.test(color)) {
-        return color; // Color is already in hexadecimal format
+        return color; 
     } else {
         const rgb = convert.keyword.rgb(color);
         if (!rgb) {
@@ -152,22 +145,19 @@ export const convertColorToHex = (color) => {
     }
 }
 
-// Function to calculate complementary color
+
 export const calculateComplementaryColor = (color) => {
-    // Remove '#' if present
+   
     color = color.replace('#', '');
     
-    // Convert hexadecimal color to RGB
     let r = parseInt(color.substring(0, 2), 16);
     let g = parseInt(color.substring(2, 4), 16);
     let b = parseInt(color.substring(4, 6), 16);
     
-    // Invert RGB values
     let rComplementary = 255 - r;
     let gComplementary = 255 - g;
     let bComplementary = 255 - b;
     
-    // Format complementary color as hexadecimal
     let complementaryColor = '#' + 
         rComplementary.toString(16).padStart(2, '0') + 
         gComplementary.toString(16).padStart(2, '0') + 
